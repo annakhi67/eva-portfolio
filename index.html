@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Eva Klyushnikova — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   DESIGN TOKENS
+   ============================================ */
+:root{
+  --cream: #FFF9F4;
+  --cream-2: #FFF3EA;
+  --peach-1: #FFD9BE;
+  --peach-2: #FFBFA0;
+  --pink-1: #FFCADA;
+  --pink-2: #FFA2BE;
+  --coral: #F98C6B;
+  --coral-deep: #E96F52;
+  --apricot: #FFB088;
+  --gold: #E7B074;
+  --ink: #3B2A28;
+  --ink-soft: #7A6360;
+  --ink-faint: #A88E8A;
+  --white: #FFFFFF;
+  --line: rgba(59,42,40,0.10);
+
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Manrope', -apple-system, sans-serif;
+
+  --container: 1120px;
+  --radius-lg: 32px;
+  --radius-md: 22px;
+  --radius-sm: 14px;
+
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*{margin:0; padding:0; box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img, video{max-width:100%; display:block;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer; border:none; background:none;}
+
+::selection{background: var(--peach-2); color: var(--ink);}
+
+.container{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 640px){
+  .container{padding: 0 20px;}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important;}
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.eyebrow{
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--coral-deep);
+}
+h1, h2, h3{
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.05;
+  color: var(--ink);
+}
+.section-title{
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-top: 10px;
+}
+p{
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+.reveal{
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s var(--ease-smooth), transform 0.9s var(--ease-smooth);
+}
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-1{transition-delay: 0.05s;}
+.reveal-2{transition-delay: 0.15s;}
+.reveal-3{transition-delay: 0.25s;}
+
+/* ============================================
+   NAV DOTS (side progress)
+   ============================================ */
+.side-nav{
+  position: fixed;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.side-nav button{
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  opacity: 0.4;
+  transition: all 0.4s var(--ease-smooth);
+}
+.side-nav button.active{
+  background: var(--coral-deep);
+  opacity: 1;
+  height: 26px;
+  border-radius: 6px;
+}
+@media (max-width: 900px){
+  .side-nav{display:none;}
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero{
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 40px 24px;
+}
+.hero-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--cream);
+}
+.hero-blob{
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.65;
+  will-change: transform;
+}
+.blob-1{
+  width: 640px; height: 640px;
+  background: radial-gradient(circle, var(--peach-2), transparent 70%);
+  top: -180px; left: -160px;
+  animation: float1 22s ease-in-out infinite;
+}
+.blob-2{
+  width: 560px; height: 560px;
+  background: radial-gradient(circle, var(--pink-1), transparent 70%);
+  bottom: -200px; right: -140px;
+  animation: float2 26s ease-in-out infinite;
+}
+.blob-3{
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, var(--gold), transparent 72%);
+  top: 30%; right: 10%;
+  opacity: 0.35;
+  animation: float3 30s ease-in-out infinite;
+}
+@keyframes float1{
+  0%,100%{ transform: translate(0,0) scale(1); }
+  50%{ transform: translate(60px, 50px) scale(1.08); }
+}
+@keyframes float2{
+  0%,100%{ transform: translate(0,0) scale(1); }
+  50%{ transform: translate(-50px, -40px) scale(1.06); }
+}
+@keyframes float3{
+  0%,100%{ transform: translate(0,0) scale(1); }
+  50%{ transform: translate(-40px, 60px) scale(0.92); }
+}
+
+.hero-content{
+  position: relative;
+  z-index: 2;
+  max-width: 880px;
+}
+.hero-eyebrow{
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--coral-deep);
+  margin-bottom: 22px;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-smooth) 0.2s forwards;
+}
+.hero-title{
+  font-size: clamp(48px, 9vw, 108px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  animation: fadeUp 1.1s var(--ease-smooth) 0.4s forwards;
+}
+.hero-title em{
+  font-style: italic;
+  font-weight: 400;
+  color: var(--coral-deep);
+}
+.hero-subtitle{
+  margin-top: 24px;
+  font-size: clamp(16px, 2.2vw, 21px);
+  color: var(--ink-soft);
+  font-weight: 500;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  animation: fadeUp 1.1s var(--ease-smooth) 0.6s forwards;
+}
+.hero-tags{
+  margin-top: 32px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeUp 1.1s var(--ease-smooth) 0.8s forwards;
+}
+.hero-tag{
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 100px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  box-shadow: 0 2px 10px rgba(59,42,40,0.04);
+}
+@keyframes fadeUp{
+  from{ opacity:0; transform: translateY(18px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+.scroll-cue{
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-smooth) 1.2s forwards;
+}
+.scroll-cue span{
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 700;
+}
+.scroll-cue-line{
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(var(--ink-faint), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine{
+  0%{ transform: scaleY(0); transform-origin: top; }
+  50%{ transform: scaleY(1); transform-origin: top; }
+  51%{ transform: scaleY(1); transform-origin: bottom; }
+  100%{ transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ============================================
+   ABOUT
+   ============================================ */
+.about{
+  position: relative;
+  padding: 160px 0 140px;
+  background: var(--cream);
+}
+.about-grid{
+  display: grid;
+  grid-template-columns: 0.78fr 1fr;
+  gap: 90px;
+  align-items: center;
+}
+@media (max-width: 900px){
+  .about-grid{
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
+.about-photo-wrap{
+  position: relative;
+}
+.about-photo-frame{
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  box-shadow: 0 30px 60px -20px rgba(59,42,40,0.25);
+}
+.about-photo-frame img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.about-photo-glow{
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--peach-2), var(--pink-2));
+  top: 26px; left: 26px;
+  z-index: -1;
+  opacity: 0.55;
+  filter: blur(2px);
+}
+.about-badge{
+  position: absolute;
+  bottom: -26px;
+  right: -22px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  box-shadow: 0 20px 40px -16px rgba(59,42,40,0.22);
+  max-width: 210px;
+  border: 1px solid var(--line);
+}
+@media (max-width: 640px){
+  .about-photo-wrap{ padding-bottom: 20px; }
+  .about-badge{
+    position: static;
+    margin-top: 20px;
+    max-width: none;
+  }
+}
+.about-badge .num{
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--coral-deep);
+  line-height: 1;
+}
+.about-badge .lbl{
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+.about-text .eyebrow{margin-bottom: 14px;}
+.about-text h2{
+  font-size: clamp(30px, 4vw, 44px);
+  margin-bottom: 26px;
+}
+.about-text p{
+  font-size: 16.5px;
+  margin-bottom: 18px;
+}
+.about-text p:last-of-type{margin-bottom: 0;}
+.about-facts{
+  margin-top: 38px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.about-fact{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.about-fact svg{flex-shrink: 0; color: var(--coral-deep);}
+
+/* ============================================
+   PROJECTS — VIDEO SWIPE CARDS
+   ============================================ */
+.projects{
+  position: relative;
+  padding: 140px 0 130px;
+  overflow: hidden;
+}
+.projects-bg{
+  position: absolute;
+  inset: -10%;
+  z-index: 0;
+}
+.projects-bg .bg-layer{
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-smooth);
+}
+.projects-bg .bg-layer.active{ opacity: 1; }
+.bg-layer .blob{
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+}
+.bg-layer-0 .blob-a{ width:620px; height:620px; background:radial-gradient(circle, var(--peach-2), transparent 70%); top:5%; left:2%; }
+.bg-layer-0 .blob-b{ width:520px; height:520px; background:radial-gradient(circle, #FFC79A, transparent 70%); bottom:0%; right:8%; }
+
+.bg-layer-1 .blob-a{ width:600px; height:600px; background:radial-gradient(circle, var(--pink-2), transparent 70%); top:0%; right:0%; }
+.bg-layer-1 .blob-b{ width:540px; height:540px; background:radial-gradient(circle, #FFB6D0, transparent 70%); bottom:5%; left:5%; }
+
+.bg-layer-2 .blob-a{ width:640px; height:640px; background:radial-gradient(circle, var(--gold), transparent 70%); top:8%; left:12%; }
+.bg-layer-2 .blob-b{ width:520px; height:520px; background:radial-gradient(circle, #FFD9A0, transparent 70%); bottom:2%; right:4%; }
+
+.bg-layer-3 .blob-a{ width:600px; height:600px; background:radial-gradient(circle, #FFE1EC, transparent 70%); top:2%; right:6%; }
+.bg-layer-3 .blob-b{ width:560px; height:560px; background:radial-gradient(circle, var(--pink-1), transparent 70%); bottom:0%; left:0%; }
+
+.projects .container{ position: relative; z-index: 2; }
+.projects-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+.projects-header p{
+  max-width: 470px;
+  font-size: 15px;
+}
+.projects-controls{
+  display: flex;
+  gap: 10px;
+}
+.nav-btn{
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink);
+  transition: transform 0.3s var(--ease-spring), background 0.3s, color 0.3s;
+  box-shadow: 0 8px 20px -8px rgba(59,42,40,0.15);
+}
+.nav-btn:hover{ background: var(--ink); color: var(--white); transform: translateY(-3px); }
+.nav-btn:active{ transform: scale(0.92); }
+.nav-btn:disabled{ opacity: 0.3; pointer-events: none; }
+@media (max-width: 640px){ .projects-controls{ display:none; } }
+
+.carousel-viewport{
+  overflow: visible;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+.carousel-viewport.dragging{ cursor: grabbing; }
+.carousel-track{
+  display: flex;
+  gap: 32px;
+  will-change: transform;
+}
+.video-card{
+  flex: 0 0 auto;
+  width: min(760px, 82vw);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 30px 70px -30px rgba(59,42,40,0.30);
+  border: 1px solid rgba(255,255,255,0.6);
+}
+@media (max-width: 640px){
+  .video-card{ width: 88vw; }
+  .carousel-track{ gap: 20px; }
+}
+.video-frame{
+  position: relative;
+  aspect-ratio: 16/10;
+  background: #1a1210;
+  overflow: hidden;
+}
+.video-frame video{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.play-overlay{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20,12,10,0.18);
+  transition: opacity 0.4s var(--ease-smooth), visibility 0.4s;
+  cursor: pointer;
+}
+.play-overlay.hidden{ opacity: 0; visibility: hidden; }
+.play-btn{
+  width: 74px; height: 74px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.35s var(--ease-spring);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+.play-overlay:hover .play-btn{ transform: scale(1.1); }
+.play-btn svg{ margin-left: 4px; }
+
+.video-info{
+  padding: 30px 34px 34px;
+}
+.video-index{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.project-pill{
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--coral-deep);
+  background: var(--cream-2);
+  padding: 6px 12px;
+  border-radius: 100px;
+}
+.video-title{
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.video-role{
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--coral-deep);
+  margin-bottom: 14px;
+}
+.video-desc{
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.carousel-dots{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 40px;
+}
+.carousel-dots button{
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  opacity: 0.4;
+  transition: all 0.4s var(--ease-spring);
+}
+.carousel-dots button.active{
+  opacity: 1;
+  background: var(--coral-deep);
+  width: 26px;
+  border-radius: 5px;
+}
+
+/* ============================================
+   PRESENTATIONS
+   ============================================ */
+.presentations{
+  padding: 130px 0;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);
+}
+.presentations-header{
+  max-width: 620px;
+  margin-bottom: 60px;
+}
+.presentations-header p{ margin-top: 18px; font-size: 15px; }
+
+.deck-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+  perspective: 1200px;
+}
+@media (max-width: 760px){
+  .deck-grid{ grid-template-columns: 1fr; }
+}
+.deck-card{
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 38px 36px;
+  cursor: pointer;
+  transition: transform 0.5s var(--ease-spring), box-shadow 0.5s var(--ease-spring);
+  transform-style: preserve-3d;
+  will-change: transform;
+  box-shadow: 0 20px 40px -24px rgba(59,42,40,0.18);
+  overflow: hidden;
+}
+.deck-card::before{
+  content: '';
+  position: absolute;
+  top: -40%; right: -30%;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: var(--deck-tint, var(--peach-1));
+  opacity: 0.5;
+  filter: blur(50px);
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+.deck-card:hover{
+  box-shadow: 0 34px 60px -20px rgba(59,42,40,0.26);
+}
+.deck-card:hover::before{ opacity: 0.85; }
+.deck-tag{
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--coral-deep);
+  background: var(--cream-2);
+  padding: 7px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.deck-title{
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  position: relative;
+  max-width: 90%;
+}
+.deck-desc{
+  font-size: 14.5px;
+  line-height: 1.65;
+  position: relative;
+  margin-bottom: 26px;
+}
+.deck-cta{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+  position: relative;
+}
+.deck-cta svg{ transition: transform 0.35s var(--ease-spring); }
+.deck-card:hover .deck-cta svg{ transform: translateX(5px); }
+
+/* ============================================
+   PRESENTATION MODAL
+   ============================================ */
+.modal-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 20, 18, 0.55);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s var(--ease-smooth), visibility 0.4s;
+  overflow-y: auto;
+}
+.modal-overlay.open{
+  opacity: 1;
+  visibility: visible;
+}
+.modal-panel{
+  background: var(--cream);
+  max-width: 780px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  padding: 56px 56px 70px;
+  position: relative;
+  margin: 20px auto 60px;
+  transform: translateY(40px) scale(0.97);
+  transition: transform 0.5s var(--ease-spring);
+  box-shadow: 0 50px 100px -30px rgba(0,0,0,0.35);
+}
+.modal-overlay.open .modal-panel{
+  transform: translateY(0) scale(1);
+}
+@media (max-width: 640px){
+  .modal-panel{ padding: 70px 24px 50px; }
+}
+.modal-close{
+  position: absolute;
+  top: 26px; right: 26px;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s var(--ease-spring), background 0.3s;
+}
+.modal-close:hover{ background: var(--ink); color: var(--white); transform: rotate(90deg); }
+.modal-tag{
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--coral-deep);
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 7px 14px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+}
+.modal-title{
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.modal-subtitle{
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin-bottom: 40px;
+}
+.modal-body h4{
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 34px;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+.modal-body h4:first-child{ margin-top: 0; }
+.modal-body p{
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+.modal-body ul{
+  margin: 10px 0 16px 20px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+.modal-body li{ margin-bottom: 6px; }
+.modal-body strong{ color: var(--ink); font-weight: 700; }
+.modal-body .stat-row{
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+.modal-body .stat{
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  min-width: 120px;
+}
+.modal-body .stat .n{
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--coral-deep);
+  font-weight: 500;
+}
+.modal-body .stat .l{
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  font-weight: 600;
+  margin-top: 4px;
+}
+body.modal-open{ overflow: hidden; }
+
+/* ============================================
+   SKILLS
+   ============================================ */
+.skills{
+  padding: 130px 0;
+  background: var(--cream);
+}
+.skills-grid{
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 80px;
+  margin-top: 60px;
+  align-items: start;
+}
+@media (max-width: 900px){
+  .skills-grid{ grid-template-columns: 1fr; gap: 50px; }
+}
+.skills-col-title{
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.skills-col-title .dot{
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--coral-deep);
+  flex-shrink: 0;
+}
+.tag-cloud{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.skill-tag{
+  padding: 11px 20px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  transition: transform 0.3s var(--ease-spring), background 0.3s, color 0.3s, border-color 0.3s;
+}
+.skill-tag:hover{
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
+  transform: translateY(-3px);
+}
+.skill-bars{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.skill-bar-row{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.skill-bar-label{
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.skill-bar-label span:last-child{
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+.skill-bar-track{
+  height: 7px;
+  border-radius: 100px;
+  background: var(--cream-2);
+  overflow: hidden;
+}
+.skill-bar-fill{
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--peach-2), var(--coral-deep));
+  width: 0%;
+  transition: width 1.4s var(--ease-smooth);
+}
+
+/* ============================================
+   INTERNSHIP
+   ============================================ */
+.internship{
+  padding: 130px 0 150px;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 60%, var(--cream) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.internship-inner{
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+.internship-inner p{
+  font-size: 16px;
+  margin-top: 22px;
+  text-align: left;
+}
+.internship-facts{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 34px 0 56px;
+}
+.internship-fact{
+  padding: 12px 20px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.cert-frame{
+  position: relative;
+  max-width: 560px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 40px 80px -30px rgba(59,42,40,0.30);
+  border: 10px solid var(--white);
+  background: var(--white);
+  transition: transform 0.5s var(--ease-spring);
+}
+.cert-frame:hover{ transform: scale(1.02) rotate(-0.4deg); }
+.cert-frame img{
+  width: 100%;
+  display: block;
+}
+.cert-placeholder{
+  aspect-ratio: 1.414/1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: linear-gradient(135deg, var(--cream-2), var(--peach-1));
+  color: var(--ink-soft);
+  padding: 40px;
+  text-align: center;
+}
+.cert-placeholder svg{ opacity: 0.5; }
+.cert-placeholder span{ font-size: 13.5px; font-weight: 600; }
+.cert-caption{
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--ink-faint);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================
+   MORE THAN SKILLS (personal story)
+   ============================================ */
+.story{
+  position: relative;
+  padding: 140px 0 150px;
+  background: linear-gradient(180deg, var(--cream) 0%, #FFEFE6 45%, #FFE9EE 100%);
+  overflow: hidden;
+}
+.story-bg{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+.story-bg .blob{ position:absolute; border-radius:50%; filter: blur(90px); opacity:.5; }
+.story-bg .blob-a{ width:520px; height:520px; background: radial-gradient(circle, var(--peach-2), transparent 70%); top:-120px; right:-120px; }
+.story-bg .blob-b{ width:480px; height:480px; background: radial-gradient(circle, var(--pink-1), transparent 70%); bottom:-160px; left:-120px; }
+.story .container{ position:relative; z-index:2; }
+.story-grid{
+  display:grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 900px){
+  .story-grid{ grid-template-columns: 1fr; gap: 44px; }
+}
+.story-aside{ position: sticky; top: 90px; }
+@media (max-width: 900px){ .story-aside{ position: static; } }
+.story-aside .section-title{ font-size: clamp(34px, 4.6vw, 54px); margin-bottom: 36px; }
+.story-stats{ display:flex; flex-direction:column; gap: 14px; }
+.story-stat{
+  display:flex; align-items:center; gap: 18px;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 16px 22px;
+  backdrop-filter: blur(6px);
+}
+.story-stat .n{
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 500;
+  color: var(--coral-deep);
+  min-width: 78px;
+  line-height: 1;
+}
+.story-stat .l{ font-size: 13.5px; font-weight: 600; color: var(--ink-soft); line-height: 1.4; }
+.story-text p{
+  font-size: 16.5px;
+  line-height: 1.8;
+  margin-bottom: 22px;
+}
+.story-text p.lead{
+  font-family: var(--serif);
+  font-size: clamp(19px, 1.9vw, 22px);
+  line-height: 1.6;
+  color: var(--ink);
+  font-weight: 400;
+}
+.story-quote{
+  position: relative;
+  margin: 34px 0 40px;
+  padding: 38px 40px 36px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px -30px rgba(59,42,40,0.25);
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.8vw, 30px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.story-quote::before{
+  content: '“';
+  position: absolute;
+  top: -8px; left: 26px;
+  font-size: 110px;
+  line-height: 1;
+  font-style: normal;
+  color: var(--peach-2);
+  opacity: .8;
+}
+.story-quote span{ position: relative; display:block; padding-top: 22px; }
+
+/* ============================================
+   INTERNSHIP — downloadable certificate card
+   ============================================ */
+.cert-file{
+  max-width: 560px;
+  margin: 10px auto 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 38px 36px 34px;
+  box-shadow: 0 40px 80px -36px rgba(59,42,40,0.30);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cert-file::before{
+  content:''; position:absolute; top:-90px; right:-90px; width:260px; height:260px; border-radius:50%;
+  background: var(--peach-1); opacity:.6; filter: blur(50px); pointer-events:none;
+}
+.cert-file-icon{
+  position: relative;
+  width: 68px; height: 84px;
+  border-radius: 12px;
+  background: linear-gradient(160deg, var(--peach-1), var(--pink-1));
+  display:flex; align-items:flex-end; justify-content:center;
+  padding-bottom: 12px;
+  margin-bottom: 22px;
+  font-size: 13px; font-weight: 800; letter-spacing: .08em; color: var(--coral-deep);
+}
+.cert-file-icon::before{
+  content:''; position:absolute; top:0; right:0; width:22px; height:22px;
+  background: var(--cream); border-bottom-left-radius: 10px;
+  box-shadow: -2px 2px 6px rgba(59,42,40,.10);
+}
+.cert-file-title{ font-family: var(--serif); font-size: 26px; font-weight: 500; margin-bottom: 10px; position:relative; }
+.cert-file-meta{ font-size: 15px; color: var(--ink); font-weight: 600; line-height: 1.5; position:relative; }
+.cert-file-sub{ font-size: 13px; color: var(--ink-faint); font-weight: 600; margin-top: 8px; position:relative; }
+.cert-actions{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top: 28px; position:relative; }
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding: 14px 24px; border-radius: 100px;
+  font-size: 14px; font-weight: 700;
+  transition: transform .35s var(--ease-spring), background .3s, color .3s, border-color .3s;
+}
+.btn:hover{ transform: translateY(-3px); }
+.btn-primary{ background: var(--ink); color: var(--white); }
+.btn-primary:hover{ background: var(--coral-deep); }
+.btn-ghost{ background: var(--white); color: var(--ink); border: 1px solid var(--line); }
+.btn-ghost:hover{ border-color: var(--ink); }
+
+/* ============================================
+   FILM SCHOOL
+   ============================================ */
+.filmschool{
+  padding: 130px 0 150px;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);
+}
+.film-head{ max-width: 760px; margin-bottom: 56px; }
+.film-head .section-title{ font-size: clamp(32px, 4.4vw, 52px); }
+.film-grid{
+  display:grid; grid-template-columns: 1.25fr 0.75fr; gap: 70px; align-items:start;
+}
+@media (max-width: 900px){ .film-grid{ grid-template-columns: 1fr; gap: 36px; } }
+.film-text p{ font-size: 16.5px; line-height: 1.8; margin-bottom: 20px; }
+.film-roles{
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: 30px 28px; box-shadow: 0 24px 50px -30px rgba(59,42,40,0.2);
+}
+.roles-title{ font-family: var(--serif); font-size: 21px; font-weight: 500; margin-bottom: 18px; }
+.skill-tag.highlight{ background: linear-gradient(135deg, var(--peach-1), var(--pink-1)); border-color: transparent; }
+.film-video{
+  margin-top: 80px;
+  display:grid; grid-template-columns: 1.35fr 1fr; gap: 50px; align-items:center;
+}
+@media (max-width: 900px){ .film-video{ grid-template-columns: 1fr; gap: 28px; margin-top: 56px; } }
+.yt-frame{
+  position:relative; aspect-ratio:16/9; border-radius: var(--radius-lg); overflow:hidden;
+  background:#1a1210; box-shadow: 0 34px 70px -30px rgba(59,42,40,0.35);
+}
+.yt-link-card{ display:block; background: linear-gradient(135deg, var(--peach-2), var(--pink-2)); }
+.yt-link-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition: transform .6s var(--ease-smooth); }
+.yt-link-card:hover img{ transform: scale(1.04); }
+.yt-play{
+  position:absolute; top:50%; left:50%; transform: translate(-50%,-50%);
+  width:78px; height:78px; border-radius:50%; background: rgba(255,255,255,.94);
+  display:flex; align-items:center; justify-content:center; padding-left:4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25); transition: transform .35s var(--ease-spring);
+}
+.yt-link-card:hover .yt-play{ transform: translate(-50%,-50%) scale(1.1); }
+.yt-label{
+  position:absolute; left:20px; bottom:18px;
+  background: rgba(255,255,255,.94); color: var(--ink);
+  font-size: 13px; font-weight: 700; padding: 9px 16px; border-radius: 100px;
+}
+.film-video-info .video-index{ margin-bottom: 16px; }
+.film-video-info p{ font-size: 15.5px; line-height: 1.75; margin-bottom: 14px; }
+.film-video-info .btn{ margin-top: 10px; }
+
+
+/* ============================================
+   CONTACT / CLOSING
+   ============================================ */
+.contact{
+  position: relative;
+  padding: 160px 0 90px;
+  background: var(--ink);
+  color: var(--cream);
+  overflow: hidden;
+  text-align: center;
+}
+.contact-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.contact-bg .blob{
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+}
+.contact-bg .blob-a{ width:560px; height:560px; background: radial-gradient(circle, var(--peach-2), transparent 70%); top:-160px; left:-100px; }
+.contact-bg .blob-b{ width:520px; height:520px; background: radial-gradient(circle, var(--pink-2), transparent 70%); bottom:-180px; right:-80px; }
+
+.contact .container{ position: relative; z-index: 2; }
+.contact-eyebrow{
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--apricot);
+  margin-bottom: 22px;
+}
+.contact-title{
+  font-family: var(--serif);
+  font-size: clamp(34px, 5.5vw, 64px);
+  font-weight: 500;
+  max-width: 780px;
+  margin: 0 auto;
+  line-height: 1.15;
+  color: var(--cream);
+}
+.contact-title em{ font-style: italic; color: var(--peach-2); font-weight: 400; }
+.contact-sub{
+  margin-top: 22px;
+  font-size: 16px;
+  color: rgba(255,249,244,0.65);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.contact-links{
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+.contact-link{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 28px;
+  background: rgba(255,249,244,0.06);
+  border: 1px solid rgba(255,249,244,0.16);
+  border-radius: 100px;
+  color: var(--cream);
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.35s var(--ease-spring), background 0.35s, border-color 0.35s;
+}
+.contact-link:hover{
+  background: var(--peach-2);
+  color: var(--ink);
+  border-color: var(--peach-2);
+  transform: translateY(-4px);
+}
+.contact-link svg{ flex-shrink: 0; }
+
+.footer-note{
+  margin-top: 100px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255,249,244,0.12);
+  font-size: 12.5px;
+  color: rgba(255,249,244,0.4);
+  letter-spacing: 0.04em;
+}
+
+</style>
+</head>
+<body>
+
+<nav class="side-nav" id="sideNav">
+  <button data-target="#about" aria-label="About"></button>
+  <button data-target="#projects" aria-label="Projects"></button>
+  <button data-target="#presentations" aria-label="Presentations"></button>
+  <button data-target="#skills" aria-label="Skills"></button>
+  <button data-target="#story" aria-label="More than skills"></button>
+  <button data-target="#internship" aria-label="Internship"></button>
+  <button data-target="#filmschool" aria-label="Film school"></button>
+  <button data-target="#contact" aria-label="Contact"></button>
+</nav>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-blob blob-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Portfolio · 2026</div>
+    <h1 class="hero-title">Eva<br><em>Klyushnikova</em></h1>
+    <p class="hero-subtitle">Stories, media, and the spaces where cultures meet — a portfolio at the intersection of communication, social impact, and global affairs.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">Media &amp; Communications</span>
+      <span class="hero-tag">Social Sciences for Global Challenges</span>
+      <span class="hero-tag">International Relations</span>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-cue-line"></div>
+  </div>
+</section>
+
+<!-- ============================================
+     ABOUT
+     ============================================ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo-glow"></div>
+        <div class="about-photo-frame">
+          <img src="eva_portrait.jpg" alt="Portrait of Eva Klyushnikova">
+        </div>
+        <div class="about-badge">
+          <div class="num">Top 50%</div>
+          <div class="lbl">of my cohort after first year at HSE University</div>
+        </div>
+      </div>
+      <div class="about-text reveal reveal-2">
+        <div class="eyebrow">About Me</div>
+        <h2>The space between people, ideas, and the world they live in</h2>
+        <p>My name is Eva. I'm nineteen, and I'm currently a student at HSE University — one of Russia's leading universities for economics and the social sciences — where I finished my first year among the top 50% of my cohort.</p>
+        <p>I'm fascinated by the space between people, ideas, and the world they inhabit — by how stories shape the way we see each other, how communication influences society, and how people from different cultures and backgrounds come to understand one another. That curiosity has pulled me toward filmmaking, media, social projects, and educational initiatives, while building a deeper interest in global affairs and social change.</p>
+        <p>What ties these interests together is a simple question: why do people think, communicate, and act the way they do — and how can ideas bring them closer together? I don't see communication as simply a way to share information. I see it as a tool for understanding people, connecting perspectives, and creating change — the perspective I want to keep developing through my studies.</p>
+        <div class="about-facts">
+          <div class="about-fact">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 10L12 4L2 10L12 16L22 10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 12V17C6 17 8 20 12 20C16 20 18 17 18 17V12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            HSE University, Moscow
+          </div>
+          <div class="about-fact">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 20C4 16.5 7.5 14 12 14C16.5 14 20 16.5 20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Age 19
+          </div>
+          <div class="about-fact">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3L14.5 8.5L20.5 9.3L16 13.4L17.2 19.5L12 16.4L6.8 19.5L8 13.4L3.5 9.3L9.5 8.5L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            Moscow, Russia
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PROJECTS — VIDEO CAROUSEL
+     ============================================ -->
+<section class="projects" id="projects">
+  <div class="projects-bg" id="projectsBg">
+    <div class="bg-layer bg-layer-0 active"><div class="blob blob-a"></div><div class="blob blob-b"></div></div>
+    <div class="bg-layer bg-layer-1"><div class="blob blob-a"></div><div class="blob blob-b"></div></div>
+    <div class="bg-layer bg-layer-2"><div class="blob blob-a"></div><div class="blob blob-b"></div></div>
+    <div class="bg-layer bg-layer-3"><div class="blob blob-a"></div><div class="blob blob-b"></div></div>
+  </div>
+
+  <div class="container">
+    <div class="projects-header reveal">
+      <div>
+        <div class="eyebrow">My Video Projects</div>
+        <h2 class="section-title" style="font-size:clamp(30px,4vw,44px); margin-top:8px;">Video &amp; Film Projects</h2>
+        <p>Four video projects I created — from a short film about grief to a promo video for VK Festival. These are projects, not events: the VK Festival piece is a video I made, not the festival itself. Swipe or use the arrows to explore.</p>
+      </div>
+      <div class="projects-controls">
+        <button class="nav-btn" id="prevBtn" aria-label="Previous project">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="nav-btn" id="nextBtn" aria-label="Next project">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="carousel-viewport" id="carouselViewport">
+      <div class="carousel-track" id="carouselTrack">
+
+        <article class="video-card">
+          <div class="video-frame">
+            <video playsinline preload="metadata" poster="poster1.jpg" src="project1.mp4"></video>
+            <div class="play-overlay">
+              <div class="play-btn">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8 5V19L19 12L8 5Z" fill="#3B2A28"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="video-info">
+            <div class="video-index"><span class="project-pill">Video project</span><span>01</span></div>
+            <h3 class="video-title">After the Goodbye</h3>
+            <p class="video-desc">A story about grief, loneliness, and the weight we carry when we lose someone important. What begins as a simple meeting between two friends slowly turns into something much darker, leaving the protagonist alone with her pain. The ending remains uncertain, inviting the viewer to decide what happens next.</p>
+          </div>
+        </article>
+
+        <article class="video-card">
+          <div class="video-frame">
+            <video playsinline preload="metadata" poster="poster2.jpg" src="project2.mp4"></video>
+            <div class="play-overlay">
+              <div class="play-btn">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8 5V19L19 12L8 5Z" fill="#3B2A28"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="video-info">
+            <div class="video-index"><span class="project-pill">Video project</span><span>02</span></div>
+            <h3 class="video-title">Come Back to Me</h3>
+            <p class="video-desc">A small visual ode to spring and the feeling of a new beginning. The protagonist walks through the city, trying to notice the first signs of life returning to the world — light, movement, colour, and warmth. Inspired by RM’s Come Back to Me, the video captures the quiet anticipation of entering a new era.</p>
+          </div>
+        </article>
+
+        <article class="video-card">
+          <div class="video-frame">
+            <video playsinline preload="metadata" poster="poster3.jpg" src="project3.mp4"></video>
+            <div class="play-overlay">
+              <div class="play-btn">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8 5V19L19 12L8 5Z" fill="#3B2A28"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="video-info">
+            <div class="video-index"><span class="project-pill">Video project</span><span>03</span></div>
+            <h3 class="video-title">VK Festival</h3>
+            <p class="video-desc">A fast-paced visual interpretation of the VK Festival — full of movement, energy, music, and colour. Dynamic editing and visual effects were used to recreate the atmosphere of an event that feels impossible to experience passively. The video was created as a promotional piece designed to make the audience feel the event before even being there.</p>
+          </div>
+        </article>
+
+        <article class="video-card">
+          <div class="video-frame">
+            <video playsinline preload="metadata" poster="poster4.jpg" src="project4.mp4"></video>
+            <div class="play-overlay">
+              <div class="play-btn">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8 5V19L19 12L8 5Z" fill="#3B2A28"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="video-info">
+            <div class="video-index"><span class="project-pill">Video project</span><span>04</span></div>
+            <h3 class="video-title">Anxiety</h3>
+            <p class="video-desc">What if your anxiety had a face — and followed you everywhere? This video turns intrusive thoughts and constant anxiety into a physical presence, transforming an invisible internal struggle into something the viewer can see. The story gradually moves from being controlled by anxiety to finally letting it go.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="carousel-dots" id="carouselDots">
+      <button class="active" data-i="0" aria-label="Project 1"></button>
+      <button data-i="1" aria-label="Project 2"></button>
+      <button data-i="2" aria-label="Project 3"></button>
+      <button data-i="3" aria-label="Project 4"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PRESENTATIONS
+     ============================================ -->
+<section class="presentations" id="presentations">
+  <div class="container">
+    <div class="presentations-header reveal">
+      <div class="eyebrow">Research &amp; Strategy</div>
+      <h2 class="section-title" style="font-size:clamp(30px,4vw,44px); margin-top:8px;">Presentations</h2>
+      <p>Four applied projects from my coursework — marketing strategy, media, and geoanalytics — spanning branding, market research, and audience strategy. Click any card to read the full presentation.</p>
+    </div>
+
+    <div class="deck-grid reveal reveal-2">
+      <div class="deck-card" data-modal="modal-brainpower" style="--deck-tint: var(--peach-2);">
+        <span class="deck-tag">EdTech Startup Strategy</span>
+        <h3 class="deck-title">Brain Power</h3>
+        <p class="deck-desc">A new-format online math school for children aged 10–12, built around short-form video and an AI-avatar teaching concept.</p>
+        <span class="deck-cta">Read presentation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+
+      <div class="deck-card" data-modal="modal-nexuhub" style="--deck-tint: var(--pink-2);">
+        <span class="deck-tag">Media Project</span>
+        <h3 class="deck-title">NexuHub</h3>
+        <p class="deck-desc">A media brand covering case championships, hackathons, forums and grants for young people building careers in business.</p>
+        <span class="deck-cta">Read presentation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+
+      <div class="deck-card" data-modal="modal-seasons-marketing" style="--deck-tint: var(--gold);">
+        <span class="deck-tag">Marketing Strategy</span>
+        <h3 class="deck-title">Seasons</h3>
+        <p class="deck-desc">Brand and communication strategy for a creative wellness school in Moscow, built around two distinct audience segments.</p>
+        <span class="deck-cta">Read presentation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+
+      <div class="deck-card" data-modal="modal-seasons-geo" style="--deck-tint: var(--pink-1);">
+        <span class="deck-tag">Geomarketing Analysis</span>
+        <h3 class="deck-title">Seasons — Location Study</h3>
+        <p class="deck-desc">A location, competitor, and online-visibility audit for Seasons, with recommendations for relocation and growth.</p>
+        <span class="deck-cta">Read presentation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL: Brain Power -->
+<div class="modal-overlay" id="modal-brainpower">
+  <div class="modal-panel">
+    <button class="modal-close" data-close><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <span class="modal-tag">EdTech Startup Strategy</span>
+    <h3 class="modal-title">Brain Power</h3>
+    <p class="modal-subtitle">A new-format online math school for children aged 10–12</p>
+    <div class="modal-body">
+      <h4>Concept</h4>
+      <p>Brain Power is an online math school for elementary and middle-schoolers (core audience: 10–12 years old), built on a simple principle — meet the child where they already live: short, vertical video.</p>
+      <ul>
+        <li><strong>Hook (TikTok):</strong> an account of short clips where invented characters explain math in a meme-driven aesthetic, designed to capture attention.</li>
+        <li><strong>Warm-up (Telegram):</strong> a channel that shows the "behind the scenes" of the school, shares materials, and links to the website.</li>
+        <li><strong>Conversion (website):</strong> an application form for the school, plus a library of free materials for exam preparation.</li>
+      </ul>
+      <h4>Positioning, in one line</h4>
+      <p>"Brain Power" is not an ordinary online school. It's math disguised as a child's favorite content — the same rhythm, the same characters and memes found in their feed, but with a real curriculum and a live teacher inside.</p>
+      <p>During each live class, the teacher broadcasts through a real-time AI avatar of an invented character, teaching with a bright, meme-literate delivery while keeping the class firmly focused on the subject. The entertainment format is the attention-grabbing mechanism — the substance is a genuine curriculum. The goal is to rebuild a child's interest in learning through a format they normally experience as entertainment.</p>
+      <h4>Three cards — and how they work</h4>
+      <p><strong>Card 1 — Audience, ages 10–12.</strong> This is the "golden" entry age: the child already browses social media independently and is forming their own taste, but a parent still makes the purchase decision. So the whole product is designed in two layers: language and aesthetics for the child; arguments and trust-building for the parent.</p>
+      <p><strong>Card 2 — Content that "annoys, but holds attention."</strong> A deliberate bet on brainrot-style aesthetics: exaggerated characters, loud captions, an odd format. The slightly overloaded, absurd image breaks banner blindness and keeps viewers watching. The core trick: turn the irritant into retention — the first frame hooks with emotion or absurdity, but every 1.5–2 seconds the viewer gets a new stimulus and one clear math idea.</p>
+      <p><strong>Card 3 — An account that feels like a parallel universe.</strong> A neon, cyber-styled aesthetic, a "parallel math universe," mascot characters. This delivers two things at once: a sense of "a place not for everyone" (valuable to a teenager), and distance from the image of an "ordinary school."</p>
+      <h4>Market analysis</h4>
+      <p>Russia's online-education (EdTech) market reached roughly ₽154 billion by the end of 2025, up about 12% year-on-year (Smart Ranking data) — though growth has slowed noticeably from pandemic-era rates of up to 100% to a 10–16% quarterly range that continues to decline, driven by a high key interest rate and a more cautious "savings" mindset among consumers.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">₽154B</div><div class="l">Russian EdTech market, 2025</div></div>
+        <div class="stat"><div class="n">36%</div><div class="l">share held by children's online education</div></div>
+        <div class="stat"><div class="n">₽55B</div><div class="l">children's EdTech segment, 2025</div></div>
+      </div>
+      <p>Children's online education is now the largest EdTech segment — about 36% of the market, or roughly ₽55 billion in 2025 — and it has overtaken adult education. The team is entering the largest, still-growing segment, but at a moment when easy growth has ended and the winners are those who can attract attention affordably. <strong>Conclusion:</strong> acquisition cost is the industry's central pain point — organic, viral reach becomes a strategic advantage over paid advertising.</p>
+      <h4>Competitors</h4>
+      <p>Established players include Foxford, Tetrika, Skysmart, Umskul, TutorOnline, "Dom Znaniy," and Uchi.ru — most rely on parent-facing performance ads, individual tutoring formats, or gamified school-curriculum platforms; only Umskul leans on a youth-oriented, meme-literate voice through bloggers and social media.</p>
+      <h4>The open niche</h4>
+      <p>A "child-first" acquisition model for ages 10–12: entertaining organic content as the primary channel, branded characters that come alive during class. The project competes with Foxford for the parent's budget — and with TikTok itself, games, and influencers for the child's attention and time.</p>
+      <h4>Target audience: Generation Alpha</h4>
+      <p>Children aged 10–12 belong to Generation Alpha (born after ~2010), whose cognitive profile differs from previous generations: fragmented, fast-switching attention ("clip thinking"); visual-first perception (up to 70–80% of intake is visual); a need for instant feedback and personalization; and fluency in memes and trends as a native language.</p>
+      <h4>Pain points &amp; desires</h4>
+      <p><strong>Child's pain:</strong> "Math is boring, hard, and not for me"; can't sit still with the material; a gap between the exciting world of social media and the monotony of school.</p>
+      <p><strong>Parent's pain:</strong> "My child doesn't want to study"; tutors are expensive and the child is still bored; anxiety about a disengaged child's future; distrust of "entertainment-based" learning.</p>
+      <p><strong>Child wants:</strong> to not feel stupid; small, quick wins; fun; to belong to something that isn't "school." <strong>Parent wants:</strong> for the child to want to study on their own; visible results; a fair price and a sense of reliability.</p>
+      <h4>Promotion mechanics &amp; funnel</h4>
+      <p>The core funnel: children discover the brand on TikTok → move to Telegram → show it to their parents → parents decide. Content cadence is high-frequency on TikTok, tracking fresh trends quickly, with one micro math idea per clip, and a steady, non-pushy nudge toward "continued on Telegram."</p>
+      <h4>MVP results</h4>
+      <div class="stat-row">
+        <div class="stat"><div class="n">900</div><div class="l">views across 3 TikTok clips</div></div>
+        <div class="stat"><div class="n">9</div><div class="l">new TikTok followers</div></div>
+        <div class="stat"><div class="n">20</div><div class="l">Telegram subscribers</div></div>
+      </div>
+      <p><strong>What worked:</strong> a strong visual world and character set that built instant recognition; the "teacher who comes alive" concept as a genuine point of difference; a call-to-question ending format performed best; positive audience response (likes, follows, comments).</p>
+      <p><strong>Growth areas:</strong> too little content volume for the algorithm to gain traction; a weak bridge into Telegram; an incomplete funnel toward the parent, who needs a more optimized website experience.</p>
+      <h4>Conclusions</h4>
+      <ul>
+        <li>The market choice is sound — children's EdTech is Russia's largest segment (~36%, ~₽55B) — but easy growth has ended, and low-cost attention now decides the winners.</li>
+        <li>The two-layer design (child-facing aesthetics, parent-facing trust) is essential and should be preserved.</li>
+        <li>Format is the entry point: clipped, "irritating-but-retentive" content works, provided each frame still delivers one clear idea.</li>
+        <li>The AI-avatar concept is timely and technically accessible — but should only ever use invented characters, never impersonate real people.</li>
+        <li>The project needs a higher volume of content and a stronger Telegram bridge to sustain algorithmic growth.</li>
+        <li>Success should be measured by conversion between funnel stages, not raw view counts.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: NexuHub -->
+<div class="modal-overlay" id="modal-nexuhub">
+  <div class="modal-panel">
+    <button class="modal-close" data-close><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <span class="modal-tag">Media Project</span>
+    <h3 class="modal-title">NexuHub</h3>
+    <p class="modal-subtitle">A media brand about case championships, hackathons, forums and grants</p>
+    <div class="modal-body">
+      <h4>Idea</h4>
+      <p>NexuHub is built for young people (16–25) who want to grow in entrepreneurship and project work and are looking for an accessible way to find opportunities in case championships, hackathons, and forums. Instead of scattered mailing lists and disconnected promo posts, NexuHub offers a single media source across Telegram, YouTube, and TikTok — announcements, guides, and life-hacks that help people find the right events, alongside educational content written in plain language.</p>
+      <p>The goal is to build both an information resource for students and school-leavers, and a genuine community of motivated people ready to act on their potential through the events the project covers.</p>
+      <h4>Why NexuHub</h4>
+      <p>The team combines media and analytical skills with a live connection to the community and a native understanding of how to talk to young people — able to turn dry announcements into inspiring stories. The team isn't observing from the outside; they're active participants in this world themselves, which is what makes the project authentic, dynamic, and genuinely useful.</p>
+      <h4>Market analysis &amp; competitors</h4>
+      <p>Existing alternatives fall short in different ways: project-showcase communities focus narrowly on one competition ("Bolshaya Peremena") and target only school and vocational students; university case clubs run championships but don't cover or inform about them, reaching only their own students; and blogs run by event participants share personal highlights and emotions but build a personal brand rather than a community of shared interest.</p>
+      <p>NexuHub's difference is that it doesn't just inform — it engages, combining expert interviews, short TikTok content, and Telegram analysis to make the topic of competitive case-work feel closer, clearer, and more visually appealing. The tone is energy, humor, and practical value rather than academic distance.</p>
+      <h4>SMART goals (Oct 2025 – Jan 2027)</h4>
+      <ul>
+        <li>Grow the Telegram channel to 500 subscribers by October 22, 2025, through reposts in student chats, micro-influencer promotion, and consistent posting.</li>
+        <li>Convert at least 15 subscribers into registrants for at least one forum, case championship, or contest by the same date.</li>
+        <li>Attend and cover at least one industry event, producing 5+ pieces of content to motivate at least 10 subscribers to participate in similar events.</li>
+        <li>Reach an average audience rating of at least 4.2/5 on "content quality" and "usefulness" via survey.</li>
+        <li>Win a Rosmolodezh (Russian Youth Affairs Agency) grant of at least ₽300,000 by January 2027 to fund an offline event and new educational formats.</li>
+      </ul>
+      <h4>Target audience</h4>
+      <p>Per Major League Hacking research, hackathon participants are roughly 73% male and 24% female, and about 75% are students. In the team's own survey of 53 respondents (school, university, and vocational students), 70% were interested in cases, championships, hackathons, and grants, but 60% couldn't recall an accessible media brand building a community around these topics — 46% cited a lack of community as a problem, 48% cited self-doubt, and 44% cited a lack of practice. 94% said they would subscribe to such a channel.</p>
+      <p><strong>Persona — Alexander, 18:</strong> a first-year economics and management student in Moscow interested in innovation, with no steady job, working on student projects and hoping to launch a startup. He needs experience, help formulating ideas, and support finding a team — NexuHub gives him information, stories from professionals in his field, and the confidence to build something of his own.</p>
+      <p><strong>Persona — Anna, 23:</strong> a fourth-year information-systems student in Kazan, two years into a business-analytics job, attending hackathons for networking and career growth. She wants to sharpen her business-modeling skills and win a case championship — NexuHub's event announcements, focused guides, and life-hacks help her skill up quickly, while interviews with experts and winners provide motivation.</p>
+      <h4>Go-to-market &amp; content strategy</h4>
+      <p>The rollout runs in four phases: <strong>launch</strong> (Sep–Oct 2025) — starting Telegram and TikTok and forming a core audience; <strong>growth</strong> (Oct–Nov 2025) — establishing a regular content cycle, expert interviews, and guides; <strong>scale</strong> (Jan–Mar 2026) — expanding beyond the university with brand collaborations and mini-events; and <strong>monetization</strong> (Spring–Summer 2026) — partner integrations, merchandise, and courses.</p>
+      <p>Content maps to a classic funnel: <strong>Awareness</strong> through emotional, behind-the-scenes TikTok content; <strong>Acquisition</strong> through announcements of cases, grants, and hackathons; <strong>Activation</strong> through case breakdowns and mini-guides; <strong>Retention</strong> through winner interviews and community-building; and <strong>Referral</strong> through challenges, contests, and shareable memes.</p>
+      <h4>Brand voice</h4>
+      <p>NexuHub's visual identity uses orange and black, paired with Lab Grotesque and an accent typeface, Chekhov. The tone of voice is deliberately informal — slang for money, friends, and side deals — explaining complex ideas in the simplest possible terms. The team frames itself not as experts or teachers, but as "friends from the same cohort who got a bit ahead," constantly pulling readers into the next business idea, aiming to create an emotional, memorable connection with readers.</p>
+      <h4>Results</h4>
+      <div class="stat-row">
+        <div class="stat"><div class="n">534</div><div class="l">Telegram subscribers</div></div>
+        <div class="stat"><div class="n">20</div><div class="l">published posts</div></div>
+        <div class="stat"><div class="n">400–600</div><div class="l">views per post</div></div>
+      </div>
+      <p>Positive engagement grew from about 30 reactions in the first week to 50 by the last. The team produced a 23-minute expert interview shot on three cameras, launched a TikTok account with its first three clips (300–700 views), and secured access to cover the "ProFinance" project forum, producing 10 pieces of content including two mini-interviews with active participants.</p>
+      <p>Audience follow-up surveys (51–109 respondents) found that 46.8% had registered for at least one event from the channel's picks; 64.7% said the interview content increased their motivation and 68.6% said they learned something useful; and the editorial team's content was rated an average of roughly 4.2–4.4 out of 5 on both "quality" and "usefulness."</p>
+      <h4>SWOT summary</h4>
+      <p><strong>Strengths:</strong> an authentic, insider voice; real reporting rather than aggregation; a mission-driven, engaged team; a flexible multi-platform format (Telegram + TikTok); a community-first approach rather than pure news.</p>
+      <p><strong>Weaknesses:</strong> limited experience with systematic content planning; no stable funding or partners yet; a small team covering multiple roles at once.</p>
+      <p><strong>Opportunities:</strong> rising interest in hackathons and project culture among students; potential collaborations with forums, universities, and grant programs; a realistic path to a development grant by 2027.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Seasons Marketing -->
+<div class="modal-overlay" id="modal-seasons-marketing">
+  <div class="modal-panel">
+    <button class="modal-close" data-close><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <span class="modal-tag">Marketing Strategy</span>
+    <h3 class="modal-title">Seasons</h3>
+    <p class="modal-subtitle">Brand and communication strategy for a creative wellness school</p>
+    <div class="modal-body">
+      <h4>Segment 1 — "Anna": the tired perfectionist</h4>
+      <p>Based near Marina Roshcha in Moscow, close to work or school. <strong>Demographics:</strong> women aged 30–40 with a university degree (design, humanities, or IT), working in creative industries — UX designers, marketers, freelancers — with a mid-to-above-average income and a limited hobby budget; married, with no children or one child.</p>
+      <p><strong>Behavior:</strong> she visits to de-stress after work, find positive emotions, and unwind in a comfortable setting. Atmosphere and hands-on practice matter more than price, though both price and scheduling still factor in. Her barriers are exhaustion, high prices, and a fear of judgment or comparison to others. She finds out about places via Telegram, Instagram, and friends' recommendations.</p>
+      <p><strong>Psychographics:</strong> she values personal time and boundaries, and craves inner calm and stability. She experiences performance anxiety and perfectionism, and is looking for psychological safety in her free time. She sees Seasons as a "comforting friend" — a blanket and a cup of tea — and prefers real experiences over generic courses.</p>
+      <p><em>Consumer insight:</em> "In a huge city where everyone is always rushing somewhere, I need a place to rest from the noise and the routine, feel comfortable, and find inspiration — somewhere I can gently shift out of work mode, be less than perfect, and not feel judged."</p>
+      <h4>Segment 2 — "Igor": the professional pragmatist</h4>
+      <p>Based in central Moscow, close to venues that host professional events. <strong>Demographics:</strong> men aged 25–35 working in creative fields — marketing, freelance, photography — with unstable income and a limited budget.</p>
+      <p><strong>Behavior:</strong> he attends to build skills for career growth and to meet future clients, wanting more practice with real-world clients. He looks for well-equipped venues with a professional (not "homey") atmosphere and an "idea-to-execution" format. His barriers are high prices, financial pressure, gender imbalance and discomfort, a lack of hands-on client work, and limited free time due to an irregular schedule. He hears about events through Telegram and professional contacts.</p>
+      <p><strong>Psychographics:</strong> focused on practical outcomes and career growth, he values networking and business contacts and evaluates prices critically. He prefers a professional atmosphere over a "homey" one.</p>
+      <p><em>Consumer insight:</em> "I wish I could find an event that isn't just a hobby or downtime, but a genuine strategic investment in a professional tool — somewhere to meet future clients and new collaborators, a social ladder in my professional world that helps me build my career and gain stability, not just relax."</p>
+      <h4>Communication matrix</h4>
+      <p>For Anna's segment, the positioning is: <strong>"Seasons is a refuge from the race for perfection."</strong> The school offers soulful, atmospheric workshops and courses — a kind of "creativity therapy" where what matters isn't the perfect result but simply being present, and being yourself. The key message: no one will criticize you here, because in Seasons nothing has to be perfect — what matters is that this becomes your own moment of peace. Slogan: <strong>"Seasons — creativity that heals."</strong></p>
+      <p>For Igor's segment, the positioning shifts: <strong>Seasons is not just a creative school, but a professional testing ground and business hub.</strong> For creative pragmatists, time is money and results are the measure of success — the methodology is a compressed cycle of execution: arrive with a request or a problem, leave with a finished solution, a portfolio piece, and new contacts. Key message: this isn't tuition, it's a skills upgrade — your portfolio grows with real casework, and your contact book grows with real clients. Slogan: <strong>"Learn to invest in yourself with Seasons."</strong></p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">₽60K</div><div class="l">Instagram budget</div></div>
+        <div class="stat"><div class="n">₽100K</div><div class="l">Website + search ads</div></div>
+        <div class="stat"><div class="n">₽200.5K</div><div class="l">Influencer &amp; PR budget</div></div>
+      </div>
+      <h4>6-month promotion plan</h4>
+      <p><strong>PR (Telegram, Instagram):</strong> Instagram builds beautiful, aesthetic content to attract new audiences, while Telegram retains the most loyal, engaged segment and builds a sense of belonging to a closed community.</p>
+      <p><strong>Digital marketing (website + ads):</strong> the website is the "home base," the face and primary point of sale for Seasons. Advertising — including search ads — efficiently reaches high-intent audiences already searching for courses with specific queries.</p>
+      <p><strong>Branding &amp; publicity:</strong> influencer partnerships are the most powerful trust-building tool. Recommendations from an independent creator, or mentions from credible media, function as social proof and significantly increase brand trust — directly influencing revenue and growth.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Seasons Geomarketing -->
+<div class="modal-overlay" id="modal-seasons-geo">
+  <div class="modal-panel">
+    <button class="modal-close" data-close><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <span class="modal-tag">Geomarketing Analysis</span>
+    <h3 class="modal-title">Seasons — Location Study</h3>
+    <p class="modal-subtitle">A location, competitor, and online-visibility audit</p>
+    <div class="modal-body">
+      <h4>Location &amp; transport accessibility</h4>
+      <p>Seasons is located at Likhov Lane 12/2, in the Tverskoy district of central Moscow — an area lined with 19th- and 20th-century townhouses and mansions, so the walk to the school passes architectural detail that sets a certain mood before arrival. It's within walking distance of three metro stations: Tsvetnoy Bulvar (5–7 min), Trubnaya (7–10 min), and Chekhovskaya (10–12 min), plus a nearby bus stop served every 10–20 minutes. For drivers, Likhov Lane is a quiet courtyard side-street, though parking in the area is limited and paid.</p>
+      <h4>Foot traffic &amp; population density</h4>
+      <p>Roughly 7,613 people live within a 500-meter radius, and there are many office buildings near Tsvetnoy Bulvar and Trubnaya Square — but this is targeted, directional traffic rather than passing foot traffic, since the lane itself is quiet and dead-end, mostly used by residents rather than tourists.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">7,613</div><div class="l">residents within 500m</div></div>
+        <div class="stat"><div class="n">10,417/km²</div><div class="l">Tverskoy district density</div></div>
+        <div class="stat"><div class="n">4.9</div><div class="l">rating, 95 reviews</div></div>
+      </div>
+      <p>The Tverskoy district borders every other district of central Moscow, covers 727 hectares, and holds many of the city's landmark sites — the Bolshoi Theatre, GUM, Red Square, Zaryadye Park — with a density of about 10,417 people/km², dominated by a working population.</p>
+      <h4>Anchor destinations nearby</h4>
+      <p>The Obraztsov Puppet Theatre Museum is a two-minute walk away, giving culture- and art-minded visitors an easy path into Seasons after a museum visit. MGPU (Moscow City Pedagogical University) is similarly close — future teachers and other students are a young, expressive audience likely to enjoy creative workshops after class. Obraztsov Park lets visitors combine a walk with a workshop, and nearby landmarks (the Klapovsky mansion, the Shugaeva merchant house, the Cathedral Chamber) bring a steady trickle of tourists exploring the historic lane.</p>
+      <h4>Competitors</h4>
+      <p>A four-minute walk away is "Igra Stolov," a culinary studio running workshops and children's parties with a 5.0 rating and many positive reviews — a real risk of drawing away family-oriented visitors — alongside "Pottery Studio No. 1" nearby. Directly across from Seasons is "Claustrophobia," an escape-room venue with a 5.0 rating, popular with younger audiences looking to blow off steam. Across these competitors, visitors report high satisfaction with quality but frequent complaints about price and service — suggesting Seasons should lean into friendly, attentive staff and accessible pricing, alongside new, distinctive workshop formats.</p>
+      <h4>Geomarketing conclusions</h4>
+      <ul>
+        <li>Strong transit access from metro and bus keeps the commute easy and fast.</li>
+        <li>The historic setting adds atmosphere, and the location is close to the center of Moscow.</li>
+        <li>The main drawback is low incidental foot traffic — the lane is a quiet dead-end invisible from major pedestrian streets, mostly seen by local residents.</li>
+        <li>Nearby competing studios show higher ratings (5.0) and far more reviews (around 500 on average) than Seasons' current 4.9 rating on just 95 reviews.</li>
+      </ul>
+      <h4>Location recommendation</h4>
+      <p>Relocating Seasons to Bolshaya Dmitrovka would place it on a busy, high-footfall street — especially near TsUM — within 2–5 minutes of three metro stations (Chekhovskaya, Pushkinskaya, Tverskaya). Nearby anchors would include the Bolshoi Theatre, the Moscow Art Theatre, GITIS (a hub for creative young people), TsUM, and the galleries of Stoleshnikov Lane. This is no longer a quiet side-street but a lively avenue full of tourists, culture-seekers, and young people — meaning passers-by would be far more likely to notice and walk into Seasons, positioned visibly within a cultural center.</p>
+      <h4>Scaling Seasons</h4>
+      <p>Two or three additional Moscow locations could build brand recognition rather than growth for its own sake, while also creating economies of scale — centralized material purchasing, a unified brand, and cross-promotion, all lowering per-unit costs. The priority is preserving the intimate, homey atmosphere the original location has already built. New locations should be chosen in areas with a high density of young families or culturally engaged residents, after analyzing nearby competitors and understanding where potential clients are already traveling from.</p>
+      <h4>Product line expansion ideas</h4>
+      <ul>
+        <li>A month-long city summer camp where kids explore their hometown's culture, join excursions, and take part in workshops.</li>
+        <li>Intimate Wine &amp; Jazz evenings — a calm, unhurried night after a hard workday, centered on music and good company.</li>
+        <li>A table-styling workshop covering modern serving techniques, table settings, and napkin folding — practical enough to elevate everyday life at home.</li>
+        <li>Literary evenings with guest authors, potentially evolving into screenwriting or poetry workshops, and eventually a book club or film club.</li>
+        <li>Weekend events can run flexibly, but weekday events should stay light and unwind-focused, scheduled 6–9pm.</li>
+      </ul>
+      <h4>Geoservices audit (Yandex Maps, Zoon, 2GIS)</h4>
+      <p><strong>Strengths:</strong> a highly engaged organic audience — visitors leave reviews and ratings (especially on Zoon and Yandex Maps), share photos, and tag the school's location. User-generated photos are visually and tonally on-brand, with thoughtful captions that appeal to the target audience, and the review platforms already carry many positive reviews, some with photos from classes.</p>
+      <p><strong>Weaknesses:</strong> there's no systematic response to reviews, creating a sense of distance, and no incentive (discounts, promo codes) for leaving one. Listing pages are incomplete — missing fresh owner photos and regular updates about upcoming events. And because user content isn't moderated, any operational hiccup (a cancellation, a scheduling change) risks negative reviews sitting unanswered and damaging the overall rating.</p>
+      <h4>Recommendations for geoservices</h4>
+      <ul>
+        <li>Assign ownership of listing management — keep all fields complete, with fresh photos, video, and accurate contact details.</li>
+        <li>Broaden the category list (the school is currently listed only as a "lecture hall" or "educational center," missing categories like "event space," "cultural center," or "workshops") and keep the events calendar current.</li>
+        <li>Respond to every review — thank positive ones and resolve concerns — and run a light social-media push encouraging past visitors to tag Seasons and share their impressions.</li>
+        <li>Consider geo-targeted advertising for queries like "workshops near me" in central Moscow, plus paid visibility boosts on platforms like 2GIS.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     SKILLS
+     ============================================ -->
+<section class="skills" id="skills">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow">Toolkit</div>
+      <h2 class="section-title" style="font-size:clamp(30px,4vw,44px); margin-top:8px;">Skills &amp; Software</h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="reveal reveal-2">
+        <div class="skills-col-title"><span class="dot"></span>Software</div>
+        <div class="skill-bars">
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Adobe Premiere Pro</span><span>Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Adobe Audition</span><span>Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>CapCut</span><span>Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-label"><span>Excel</span><span>Confident</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-3">
+        <div class="skills-col-title"><span class="dot"></span>Soft skills</div>
+        <div class="tag-cloud">
+          <span class="skill-tag">Leadership</span>
+          <span class="skill-tag">People &amp; team communication</span>
+          <span class="skill-tag">Critical thinking</span>
+          <span class="skill-tag">Creative thinking</span>
+          <span class="skill-tag">Adaptability under pressure</span>
+          <span class="skill-tag">Self &amp; product presentation</span>
+          <span class="skill-tag">Event &amp; project management</span>
+          <span class="skill-tag">Cross-cultural communication</span>
+          <span class="skill-tag">Time management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     MORE THAN SKILLS
+     ============================================ -->
+<section class="story" id="story">
+  <div class="story-bg"><div class="blob blob-a"></div><div class="blob blob-b"></div></div>
+  <div class="container">
+    <div class="story-grid">
+      <aside class="story-aside reveal">
+        <div class="eyebrow">Beyond the toolkit</div>
+        <h2 class="section-title">More Than Skills</h2>
+        <div class="story-stats">
+          <div class="story-stat"><div class="n">2</div><div class="l">years on the school’s Honour Board</div></div>
+          <div class="story-stat"><div class="n">3 + 3</div><div class="l">kindergartens and schools — always a new environment</div></div>
+          <div class="story-stat"><div class="n">1</div><div class="l">huge folder of certificates and awards</div></div>
+        </div>
+      </aside>
+      <div class="story-text">
+        <p class="lead reveal">I have always been drawn to new experiences. Since the first grade, I have taken part in academic competitions, creative projects, school performances, and different extracurricular activities. I loved being involved, learning something new, and challenging myself. Over time, I became one of those students almost every teacher knew — and, more importantly, someone they could rely on. For two years, my name was displayed on the school’s Honour Board, and I still keep a huge folder of certificates and awards that represents years of curiosity, hard work, and persistence.</p>
+        <p class="reveal">I have also learned to adapt. Growing up, I changed three kindergartens and three schools, which meant constantly entering new environments and meeting new people. It taught me how to communicate, build connections, find a common language with different personalities, and feel comfortable even when everything around me is unfamiliar. I am not afraid to introduce a new idea, stand in front of an audience, or convince people that something is worth trying.</p>
+        <blockquote class="story-quote reveal"><span>Discipline has always been more important than talent alone.</span></blockquote>
+        <p class="reveal">For me, discipline has always been more important than talent alone. I was admitted to one of the leading universities in my country through consistent effort and determination. University pushed me to develop these qualities further — but also taught me how to turn them into practical skills.</p>
+        <p class="reveal">I learned how to present not only myself, but also an idea, a project, and a product. I became more confident in teamwork, learned to coordinate the creative process, distribute responsibilities, and keep a project moving from the first idea to the final result.</p>
+        <p class="reveal">My university education was strongly practice-oriented. We were constantly challenged to work as if we were already in the professional world: to think about the audience, communicate ideas clearly, work under pressure, and make an impact in a limited amount of time. It taught me that in media, every second matters, every detail communicates something, and a good idea is only as strong as the way you bring it to life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     INTERNSHIP
+     ============================================ -->
+<section class="internship" id="internship">
+  <div class="container">
+    <div class="internship-inner reveal">
+      <div class="eyebrow">Professional Experience</div>
+      <h2 class="section-title" style="font-size:clamp(30px,4vw,44px); margin-top:8px;">Internship at IBS</h2>
+      <p>I completed an internship at IBS, one of Russia’s largest IT companies, in the program “Project Activity in an IT Company” (June 10–21, 2024). It sharpened my ability to work within a team, strengthened my time management, and gave me hands-on practice presenting my own project — while working side by side with professional specialists.</p>
+      <div class="internship-facts">
+        <div class="internship-fact">Team collaboration</div>
+        <div class="internship-fact">Time management</div>
+        <div class="internship-fact">Personal project presentation</div>
+        <div class="internship-fact">Working with professional specialists</div>
+      </div>
+
+      <div class="cert-file reveal reveal-2">
+        <div class="cert-file-icon">PDF</div>
+        <div class="cert-file-title">Certificate of Completion</div>
+        <div class="cert-file-meta">Educational internship program “Project Activity in an IT Company”<br>June 10–21, 2024</div>
+        <div class="cert-file-sub">Issued by the IBS Career Development Center · original document in Russian</div>
+        <div class="cert-actions">
+          <a class="btn btn-primary" href="IBS-Internship-Certificate-Eva-Klyushnikova.pdf" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 4V15M12 15L7.5 10.5M12 15L16.5 10.5M5 19H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download certificate (PDF, 0.6 MB)
+          </a>
+          <a class="btn btn-ghost" href="IBS-Internship-Certificate-Eva-Klyushnikova.pdf" target="_blank" rel="noopener">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FILM SCHOOL
+     ============================================ -->
+<section class="filmschool" id="filmschool">
+  <div class="container">
+    <div class="film-head reveal">
+      <div class="eyebrow">Film School</div>
+      <h2 class="section-title">Learning to Tell Stories from Every Side</h2>
+    </div>
+    <div class="film-grid">
+      <div class="film-text reveal">
+        <p>As part of a summer film camp organized by a film school in Moscow, I had the opportunity to explore filmmaking from almost every angle. I tried myself as a director, costume designer, editor, lighting assistant, cinematographer, and actor, discovering how each role contributes to a story in a different way.</p>
+        <p>We learned not only how to write scripts, but also how to present and defend our ideas at film pitches. I took part in shooting short films and edited them in Adobe Premiere Pro, learning to think about storytelling both behind the camera and in the editing room.</p>
+        <p>One of the most exciting experiences was working on our final group project, where I took on the role of producer. I searched for extras, coordinated shooting schedules, helped organize the production process on set, and communicated with locations to arrange filming. It was an invaluable experience of seeing how many different elements have to come together to turn an idea into a finished film.</p>
+        <p>The film school taught me to see filmmaking as both a creative and collaborative process. I strengthened my skills in cinematography, editing, writing, organization, and communication — while working alongside talented and creative people who inspired me to experiment, take initiative, and tell stories in new ways.</p>
+      </div>
+      <div class="film-roles reveal reveal-2">
+        <div class="roles-title">Roles I tried</div>
+        <div class="tag-cloud">
+          <span class="skill-tag">Director</span>
+          <span class="skill-tag">Costume designer</span>
+          <span class="skill-tag">Editor</span>
+          <span class="skill-tag">Lighting assistant</span>
+          <span class="skill-tag">Cinematographer</span>
+          <span class="skill-tag">Actor</span>
+          <span class="skill-tag highlight">Producer · final project</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="film-video reveal">
+      <a class="yt-frame yt-link-card" href="https://youtu.be/up7O-jgEhz8" target="_blank" rel="noopener" aria-label="Watch the music video on YouTube">
+        <img src="https://img.youtube.com/vi/up7O-jgEhz8/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <span class="yt-play"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M8 5V19L19 12L8 5Z" fill="#3B2A28"/></svg></span>
+        <span class="yt-label">Open on YouTube ↗</span>
+      </a>
+      <div class="film-video-info">
+        <div class="video-index"><span class="project-pill">Music video</span></div>
+        <p>Growing up means learning how to carry responsibilities, make choices, and find your place in a world that suddenly expects you to have all the answers. But somewhere inside, the carefree dreamer we once were is still there.</p>
+        <p>This music video is a journey back to that feeling — a reminder that growing up does not have to mean growing away from yourself. Sometimes, finding your place means allowing yourself to dream again, let go of expectations, and simply feel free.</p>
+        <a class="btn btn-ghost" href="https://youtu.be/up7O-jgEhz8" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CONTACT / CLOSING
+     ============================================ -->
+<section class="contact" id="contact">
+  <div class="contact-bg">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+  </div>
+  <div class="container">
+    <div class="reveal">
+      <div class="contact-eyebrow">Thank You</div>
+      <h2 class="contact-title">Thank you for taking the time to look through my work — <em>I hope it gave you a sense of who I am.</em></h2>
+      <p class="contact-sub">I'd love to continue this conversation about media, communication, and the ideas that connect people — feel free to reach out.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:klyushnikova1eva@mail.ru">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 6L12 13L21 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>
+          klyushnikova1eva@mail.ru
+        </a>
+        <a class="contact-link" href="tel:+79807404848">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8C7.9 13.5 10.1 15.6 12.8 17L14.9 15C15.2 14.7 15.6 14.6 16 14.7C17.2 15.1 18.5 15.3 19.8 15.3C20.4 15.3 20.9 15.8 20.9 16.4V19.7C20.9 20.3 20.4 20.8 19.8 20.8C10.6 20.8 3.1 13.3 3.1 4.1C3.1 3.5 3.6 3 4.2 3H7.5C8.1 3 8.6 3.5 8.6 4.1C8.6 5.4 8.8 6.7 9.2 7.9C9.3 8.3 9.2 8.7 8.9 9L6.6 10.8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          +7 980 740 48 48
+        </a>
+      </div>
+    </div>
+    <div class="footer-note">Eva Klyushnikova — Portfolio 2026</div>
+  </div>
+</section>
+
+<script>
+(function(){
+
+  /* ============================================
+     SCROLL REVEAL
+     ============================================ */
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el=> revealObserver.observe(el));
+
+  /* ============================================
+     SKILL BARS
+     ============================================ */
+  const bars = document.querySelectorAll('.skill-bar-fill');
+  const barObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.style.width = entry.target.dataset.width + '%';
+        barObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(el=> barObserver.observe(el));
+
+  /* ============================================
+     SIDE NAV — ACTIVE STATE + SMOOTH SCROLL
+     ============================================ */
+  const sideNav = document.getElementById('sideNav');
+  const navButtons = sideNav ? sideNav.querySelectorAll('button') : [];
+  const sections = ['about','projects','presentations','skills','story','internship','filmschool','contact']
+    .map(id=> document.getElementById(id)).filter(Boolean);
+
+  navButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const target = document.querySelector(btn.dataset.target);
+      if(target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+
+  const sectionObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = '#' + entry.target.id;
+        navButtons.forEach(btn=>{
+          btn.classList.toggle('active', btn.dataset.target === id);
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s=> sectionObserver.observe(s));
+
+  /* ============================================
+     VIDEO CAROUSEL — PHYSICS DRAG + SWIPE
+     ============================================ */
+  const viewport = document.getElementById('carouselViewport');
+  const track = document.getElementById('carouselTrack');
+  const cards = Array.from(track.querySelectorAll('.video-card'));
+  const dots = Array.from(document.querySelectorAll('#carouselDots button'));
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const bgLayers = Array.from(document.querySelectorAll('#projectsBg .bg-layer'));
+
+  let currentIndex = 0;
+  let isDragging = false;
+  let startX = 0;
+  let currentTranslate = 0;
+  let startTranslate = 0;
+  let lastX = 0;
+  let lastTime = 0;
+  let velocity = 0;
+
+  function getStep(){
+    const card = cards[0];
+    const style = getComputedStyle(track);
+    const gap = parseFloat(style.gap) || 32;
+    return card.offsetWidth + gap;
+  }
+
+  function getMaxIndex(){ return cards.length - 1; }
+
+  function setTranslate(x, animate){
+    track.style.transition = animate ? 'transform 0.55s var(--ease-spring)' : 'none';
+    track.style.transform = `translateX(${x}px)`;
+  }
+
+  function goTo(index, animate = true){
+    currentIndex = Math.max(0, Math.min(getMaxIndex(), index));
+    const step = getStep();
+    currentTranslate = -currentIndex * step;
+    setTranslate(currentTranslate, animate);
+
+    dots.forEach((d,i)=> d.classList.toggle('active', i === currentIndex));
+    bgLayers.forEach((l,i)=> l.classList.toggle('active', i === currentIndex));
+    if(prevBtn) prevBtn.disabled = currentIndex === 0;
+    if(nextBtn) nextBtn.disabled = currentIndex === getMaxIndex();
+
+    // pause all videos when changing slide
+    cards.forEach(c=>{
+      const v = c.querySelector('video');
+      const overlay = c.querySelector('.play-overlay');
+      if(v && !v.paused){ v.pause(); }
+      if(overlay) overlay.classList.remove('hidden');
+    });
+  }
+
+  prevBtn && prevBtn.addEventListener('click', ()=> goTo(currentIndex - 1));
+  nextBtn && nextBtn.addEventListener('click', ()=> goTo(currentIndex + 1));
+  dots.forEach(dot=>{
+    dot.addEventListener('click', ()=> goTo(parseInt(dot.dataset.i, 10)));
+  });
+
+  let pointerDownTarget = null;
+  let hasMoved = false;
+
+  function onPointerDown(e){
+    isDragging = true;
+    hasMoved = false;
+    pointerDownTarget = e.target;
+    viewport.classList.add('dragging');
+    startX = e.clientX;
+    lastX = e.clientX;
+    lastTime = Date.now();
+    velocity = 0;
+    startTranslate = currentTranslate;
+    track.style.transition = 'none';
+    viewport.setPointerCapture && e.pointerId != null && viewport.setPointerCapture(e.pointerId);
+  }
+
+  function onPointerMove(e){
+    if(!isDragging) return;
+    const dx = e.clientX - startX;
+    if(Math.abs(dx) > 5) hasMoved = true;
+    const now = Date.now();
+    const dt = now - lastTime || 16;
+    velocity = (e.clientX - lastX) / dt;
+    lastX = e.clientX;
+    lastTime = now;
+
+    let newTranslate = startTranslate + dx;
+    // rubber-band at edges
+    const step = getStep();
+    const minTranslate = -getMaxIndex() * step;
+    const maxTranslate = 0;
+    if(newTranslate > maxTranslate){
+      newTranslate = maxTranslate + (newTranslate - maxTranslate) * 0.35;
+    } else if(newTranslate < minTranslate){
+      newTranslate = minTranslate + (newTranslate - minTranslate) * 0.35;
+    }
+    currentTranslate = newTranslate;
+    track.style.transform = `translateX(${newTranslate}px)`;
+  }
+
+  function onPointerUp(){
+    if(!isDragging) return;
+    isDragging = false;
+    viewport.classList.remove('dragging');
+
+    if(!hasMoved){
+      // treat as a tap/click — restore position and let the tap target handle itself
+      goTo(currentIndex, true);
+      const overlay = pointerDownTarget && pointerDownTarget.closest && pointerDownTarget.closest('.play-overlay');
+      if(overlay) overlay.dispatchEvent(new Event('tap-activate'));
+      return;
+    }
+
+    const step = getStep();
+    // project index based on velocity + position
+    const projected = currentTranslate + velocity * 120;
+    let targetIndex = Math.round(-projected / step);
+    targetIndex = Math.max(0, Math.min(getMaxIndex(), targetIndex));
+    goTo(targetIndex, true);
+  }
+
+  viewport.addEventListener('pointerdown', onPointerDown);
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('pointerup', onPointerUp);
+  window.addEventListener('pointercancel', onPointerUp);
+
+  // prevent native image/video drag ghosting
+  track.querySelectorAll('img, video').forEach(el=>{
+    el.addEventListener('dragstart', e=> e.preventDefault());
+  });
+
+  window.addEventListener('resize', ()=> goTo(currentIndex, false));
+
+  /* Play / pause per card — triggered by tap (click with no drag movement) */
+  cards.forEach(card=>{
+    const video = card.querySelector('video');
+    const overlay = card.querySelector('.play-overlay');
+    if(!video || !overlay) return;
+
+    function activate(){
+      cards.forEach(c=>{
+        if(c !== card){
+          const v = c.querySelector('video');
+          const o = c.querySelector('.play-overlay');
+          if(v){ v.pause(); }
+          if(o) o.classList.remove('hidden');
+        }
+      });
+      video.play();
+      overlay.classList.add('hidden');
+    }
+    overlay.addEventListener('tap-activate', activate);
+
+    video.addEventListener('click', ()=>{
+      if(!video.paused){
+        video.pause();
+        overlay.classList.remove('hidden');
+      }
+    });
+    video.addEventListener('ended', ()=> overlay.classList.remove('hidden'));
+  });
+
+  goTo(0, false);
+
+  /* ============================================
+     PRESENTATION DECK CARDS — TILT PHYSICS + MODAL
+     ============================================ */
+  const deckCards = document.querySelectorAll('.deck-card');
+  deckCards.forEach(card=>{
+    let rafId = null;
+    card.addEventListener('mousemove', (e)=>{
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      if(rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(()=>{
+        card.style.transform = `perspective(1200px) rotateX(${(-py*7).toFixed(2)}deg) rotateY(${(px*7).toFixed(2)}deg) translateY(-6px)`;
+      });
+    });
+    card.addEventListener('mouseleave', ()=>{
+      if(rafId) cancelAnimationFrame(rafId);
+      card.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) translateY(0)';
+    });
+    card.addEventListener('click', ()=>{
+      const modal = document.getElementById(card.dataset.modal);
+      if(modal) openModal(modal);
+    });
+  });
+
+  function openModal(modal){
+    modal.classList.add('open');
+    document.body.classList.add('modal-open');
+  }
+  function closeModal(modal){
+    modal.classList.remove('open');
+    document.body.classList.remove('modal-open');
+  }
+  document.querySelectorAll('.modal-overlay').forEach(modal=>{
+    modal.addEventListener('click', (e)=>{
+      if(e.target === modal) closeModal(modal);
+    });
+    modal.querySelectorAll('[data-close]').forEach(btn=>{
+      btn.addEventListener('click', ()=> closeModal(modal));
+    });
+  });
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+      document.querySelectorAll('.modal-overlay.open').forEach(m=> closeModal(m));
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
